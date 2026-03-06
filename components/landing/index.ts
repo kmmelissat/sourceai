@@ -1,0 +1,9 @@
+export { Header } from "./Header";
+export { Hero } from "./Hero";
+export { ProblemaSolucion } from "./ProblemaSolucion";
+export { Beneficios } from "./Beneficios";
+export { ComoFunciona } from "./ComoFunciona";
+export { Integraciones } from "./Integraciones";
+export { Pricing } from "./Pricing";
+export { CTAFinal } from "./CTAFinal";
+export { Footer } from "./Footer";
