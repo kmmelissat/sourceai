@@ -1,7 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Plug, Database, MessageCircle, CheckCircle2, ChevronDown } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const steps = [
   {
@@ -36,9 +40,28 @@ const steps = [
 
 export function ComoFunciona() {
   const [activeStep, setActiveStep] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const stepsContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: stepsContainerRef.current,
+        start: "top 60%",
+        end: "bottom 40%",
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const index = Math.min(Math.floor(progress * steps.length), steps.length - 1);
+          setActiveStep(index);
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <section ref={sectionRef} className="px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-text-primary sm:text-4xl">
@@ -49,8 +72,8 @@ export function ComoFunciona() {
           </p>
         </div>
 
-        {/* Roadmap vertical interactivo */}
-        <div className="mt-16 lg:mt-20">
+        {/* Roadmap vertical interactivo (cambio por scroll) */}
+        <div ref={stepsContainerRef} className="mt-16 lg:mt-20">
           <div className="relative mx-auto max-w-3xl">
             {/* Línea del roadmap (fondo) */}
             <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-border lg:left-1/2 lg:-translate-x-px" />
@@ -69,10 +92,8 @@ export function ComoFunciona() {
                 const isActive = activeStep === i;
                 const isPast = activeStep > i;
                 return (
-                  <button
+                  <div
                     key={step.number}
-                    type="button"
-                    onClick={() => setActiveStep(i)}
                     className="group relative flex w-full items-start gap-6 py-8 text-left transition-all duration-300 lg:py-10 lg:odd:flex-row lg:odd:pr-0 lg:odd:pl-0 lg:even:flex-row-reverse lg:even:pl-0 lg:even:pr-0"
                   >
                     {/* Contenido (card) */}
@@ -129,7 +150,7 @@ export function ComoFunciona() {
 
                     {/* Espacio en el otro lado para balance */}
                     <div className="hidden flex-1 lg:block" />
-                  </button>
+                  </div>
                 );
               })}
             </div>
