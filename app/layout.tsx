@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   title: "SourceAI - La IA que entiende tu código, documentación y procesos",
   description:
     "Conecta GitHub, Slack, Notion y tus documentos para encontrar respuestas sobre cómo funciona tu empresa en segundos. Pensado para startups y equipos técnicos.",
+  icons: {
+    icon: "/sourceai-icon.svg",
+    apple: "/sourceai-icon.svg",
+  },
 };
 
 export default function RootLayout({

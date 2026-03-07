@@ -1,11 +1,48 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Plug, Database, MessageCircle, CheckCircle2, ChevronDown } from "lucide-react";
+import {
+  Plug,
+  Database,
+  MessageCircle,
+  CheckCircle2,
+  Sparkles,
+  Zap,
+  FileCode,
+  FileText,
+  GitBranch,
+  MessageSquare,
+  Box,
+  Cpu,
+  Link2,
+  BookOpen,
+  Search,
+  Code2,
+  Layers,
+  CircleDot,
+} from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
+
+/* Iconos decorativos: posiciones que funcionan en mobile y desktop */
+const scatteredIcons = [
+  { Icon: Sparkles, pos: "top-0 right-0 sm:-top-3 sm:-right-4", size: "h-5 w-5 sm:h-7 sm:w-7", op: "opacity-30" },
+  { Icon: Zap, pos: "bottom-0 left-0 sm:-bottom-2 sm:-left-3", size: "h-4 w-4 sm:h-5 sm:w-5", op: "opacity-20" },
+  { Icon: FileCode, pos: "top-[15%] right-0 sm:top-1/4 sm:-right-5", size: "h-3 w-3 sm:h-4 sm:w-4", op: "opacity-15" },
+  { Icon: FileText, pos: "bottom-[30%] left-0 sm:bottom-1/3 sm:-left-4", size: "h-4 w-4 sm:h-5 sm:w-5", op: "opacity-18" },
+  { Icon: GitBranch, pos: "top-0 right-[28%] sm:-top-1 sm:right-1/4", size: "h-3 w-3 sm:h-4 sm:w-4", op: "opacity-12" },
+  { Icon: MessageSquare, pos: "top-[65%] right-1 sm:top-2/3 sm:-right-2", size: "h-2.5 w-2.5 sm:h-3 sm:w-3", op: "opacity-10" },
+  { Icon: Box, pos: "bottom-0 left-[28%] sm:-bottom-3 sm:left-1/4", size: "h-4 w-4 sm:h-5 sm:w-5", op: "opacity-15" },
+  { Icon: Cpu, pos: "top-1/2 left-0 sm:top-1/2 sm:-left-5 -translate-y-1/2", size: "h-3 w-3 sm:h-4 sm:w-4", op: "opacity-12" },
+  { Icon: Link2, pos: "top-2 right-2 sm:top-3 sm:-right-1", size: "h-2.5 w-2.5 sm:h-3 sm:w-3", op: "opacity-20" },
+  { Icon: BookOpen, pos: "bottom-2 right-0 sm:bottom-2 sm:-right-4", size: "h-4 w-4 sm:h-5 sm:w-5", op: "opacity-15" },
+  { Icon: Search, pos: "top-0 left-[32%] sm:-top-2 sm:left-1/3", size: "h-3 w-3 sm:h-4 sm:w-4", op: "opacity-10" },
+  { Icon: Code2, pos: "top-[65%] left-1 sm:top-2/3 sm:-left-2", size: "h-2.5 w-2.5 sm:h-3 sm:w-3", op: "opacity-18" },
+  { Icon: Layers, pos: "bottom-1 right-[32%] sm:-bottom-1 sm:right-1/3", size: "h-3 w-3 sm:h-4 sm:w-4", op: "opacity-12" },
+  { Icon: CircleDot, pos: "top-[28%] right-1 sm:top-1/3 sm:-right-3", size: "h-2.5 w-2.5 sm:h-3 sm:w-3", op: "opacity-15" },
+];
 
 const steps = [
   {
@@ -96,55 +133,58 @@ export function ComoFunciona() {
                     key={step.number}
                     className="group relative flex w-full items-start gap-6 py-8 text-left transition-all duration-300 lg:py-10 lg:odd:flex-row lg:odd:pr-0 lg:odd:pl-0 lg:even:flex-row-reverse lg:even:pl-0 lg:even:pr-0"
                   >
-                    {/* Contenido (card) */}
-                    <div
-                      className={`relative flex flex-1 flex-col rounded-2xl border p-6 transition-all duration-300 lg:w-[calc(50%-2rem)] ${
-                        isActive
-                          ? "border-primary/50 bg-primary/5 shadow-lg shadow-primary/10"
-                          : "border-border bg-bg-surface hover:border-primary/30 hover:bg-bg-surface"
-                      } ${i % 2 === 0 ? "lg:mr-auto lg:pr-12" : "lg:ml-auto lg:pl-12"}`}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div
-                          className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl transition-all duration-300 ${
-                            isActive ? "bg-primary text-bg-base scale-110" : "bg-primary/10 text-primary group-hover:bg-primary/20"
-                          }`}
-                        >
-                          <step.icon className="h-7 w-7" />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                            Paso {step.number}
-                          </span>
-                          <h3 className="mt-0.5 text-lg font-semibold text-text-primary">
-                            {step.title}
-                          </h3>
-                        </div>
-                        {isActive && (
-                          <ChevronDown className="h-5 w-5 shrink-0 -rotate-90 text-primary lg:rotate-0" />
-                        )}
+                    {/* Contenido (card) sin icono + muchos iconos esparcidos (mobile-friendly) */}
+                    <div className={`relative flex-1 overflow-visible px-6 py-5 sm:px-8 sm:py-6 lg:w-[calc(50%-2rem)] lg:px-0 lg:py-0 ${i % 2 === 0 ? "lg:mr-auto lg:pr-12" : "lg:ml-auto lg:pl-12"}`}>
+                      {/* Icono del paso, destacado */}
+                      <div className="pointer-events-none absolute top-2 right-2 text-primary/30 sm:-top-2 sm:-right-2" aria-hidden>
+                        <step.icon className="h-6 w-6 sm:h-8 sm:w-8" />
                       </div>
-                      <p
-                        className={`mt-4 text-sm leading-relaxed text-text-secondary transition-all duration-300 ${
-                          isActive ? "max-h-24 opacity-100" : "max-h-0 overflow-hidden opacity-0 lg:max-h-24 lg:opacity-100"
+                      {/* Iconos decorativos esparcidos */}
+                      {scatteredIcons.map(({ Icon, pos, size, op }, idx) => (
+                        <div
+                          key={idx}
+                          className={`pointer-events-none absolute ${pos} text-primary ${op} ${size}`}
+                          aria-hidden
+                        >
+                          <Icon className={size} />
+                        </div>
+                      ))}
+
+                      <div
+                        className={`relative flex flex-col rounded-xl px-6 py-5 transition-all duration-300 ${
+                          isActive
+                            ? "bg-bg-elevated ring-1 ring-primary/30 shadow-lg"
+                            : "bg-bg-surface/80 ring-1 ring-border/50"
                         }`}
                       >
-                        {step.description}
-                      </p>
+                        <span className="text-[11px] font-medium uppercase tracking-widest text-text-muted">
+                          Paso {step.number}
+                        </span>
+                        <h3 className="mt-3 text-base font-semibold tracking-tight text-text-primary">
+                          {step.title}
+                        </h3>
+                        <p
+                          className={`mt-2 text-sm leading-relaxed text-text-secondary transition-all duration-300 ${
+                            isActive ? "max-h-20 opacity-100" : "max-h-0 overflow-hidden opacity-0 lg:max-h-20 lg:opacity-100"
+                          }`}
+                        >
+                          {step.description}
+                        </p>
+                      </div>
                     </div>
 
                     {/* Nodo central en la línea */}
-                    <div className="absolute left-0 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2">
+                    <div className="absolute left-0 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2">
                       <div
-                        className={`flex h-12 w-12 items-center justify-center rounded-full border-2 transition-all duration-300 ${
+                        className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 ${
                           isActive
-                            ? "border-primary bg-primary text-bg-base shadow-lg shadow-primary/30"
+                            ? "bg-primary text-bg-base shadow-md"
                             : isPast
-                              ? "border-primary bg-primary/20 text-primary"
-                              : "border-border bg-bg-base group-hover:border-primary/50"
+                              ? "bg-primary/20 text-primary"
+                              : "bg-bg-elevated ring-1 ring-border text-text-muted"
                         }`}
                       >
-                        <span className="text-sm font-bold">{step.number}</span>
+                        <span className="text-xs font-semibold">{step.number}</span>
                       </div>
                     </div>
 
