@@ -4,7 +4,6 @@ import { useRef, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ChatMockup } from "./ChatMockup";
-import { Zap, Users, TrendingUp } from "lucide-react";
 import gsap from "gsap";
 
 export function Hero() {
@@ -12,7 +11,7 @@ export function Hero() {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const trustRef = useRef<HTMLDivElement>(null);
+  const trustRef = useRef<HTMLParagraphElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -37,15 +36,9 @@ export function Hero() {
           "-=0.3"
         )
         .fromTo(
-          trustRef.current?.children || [],
+          trustRef.current,
           { y: 16, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.4,
-            stagger: 0.1,
-            ease: "power2.out",
-          },
+          { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" },
           "-=0.4"
         )
         .fromTo(
@@ -102,23 +95,12 @@ export function Hero() {
               </Button>
             </div>
 
-            <div
+            <p
               ref={trustRef}
-              className="flex flex-wrap gap-6 border-t border-border pt-4"
+              className="text-sm text-text-muted"
             >
-              <div className="flex items-center gap-2 text-sm text-text-secondary">
-                <Zap className="h-4 w-4 text-primary" />
-                <span>Pensado para startups en crecimiento</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-text-secondary">
-                <Users className="h-4 w-4 text-primary" />
-                <span>Ideal para equipos técnicos</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-text-secondary">
-                <TrendingUp className="h-4 w-4 text-primary" />
-                <span>Reduce el time-to-productivity</span>
-              </div>
-            </div>
+              Para startups y equipos técnicos que buscan respuestas sin perder tiempo.
+            </p>
           </div>
 
           <div ref={mockupRef} className="relative">
