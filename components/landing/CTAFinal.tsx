@@ -51,7 +51,7 @@ export function CTAFinal() {
           </p>
         </div>
 
-        <div className="mt-12 rounded-2xl border border-border bg-bg-surface/80 p-6 shadow-xl shadow-primary/5 sm:p-10 sm:shadow-2xl">
+        <div className="mt-12 rounded-3xl border border-border bg-bg-surface/80 p-6 shadow-xl shadow-primary/5 sm:p-10 sm:shadow-2xl">
           {isSubmitted ? (
             <div className="py-8 sm:py-10">
               <div className="flex flex-col items-center text-center">
@@ -70,7 +70,7 @@ export function CTAFinal() {
               </div>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-xl border border-border bg-bg-elevated/50 p-4 text-center">
+                <div className="rounded-2xl border border-border bg-bg-elevated/50 p-4 text-center">
                   <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
                     Respuesta
                   </p>
@@ -78,7 +78,7 @@ export function CTAFinal() {
                     2-3 días
                   </p>
                 </div>
-                <div className="rounded-xl border border-border bg-bg-elevated/50 p-4 text-center">
+                <div className="rounded-2xl border border-border bg-bg-elevated/50 p-4 text-center">
                   <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
                     Próximo paso
                   </p>
@@ -96,7 +96,7 @@ export function CTAFinal() {
                   Usa este enlace para que más personas de tu equipo se sumen.
                 </p>
                 <div className="mt-3 flex gap-2">
-                  <div className="flex flex-1 items-center gap-2 rounded-lg border border-border bg-bg-elevated px-3 py-2.5">
+                  <div className="flex flex-1 items-center gap-2 rounded-xl border border-border bg-bg-elevated px-4 py-2.5">
                     <span className="min-w-0 truncate text-sm text-text-secondary">
                       {shareUrl || "Cargando..."}
                     </span>
@@ -105,7 +105,7 @@ export function CTAFinal() {
                     type="button"
                     variant="outline"
                     size="icon"
-                    className="h-11 w-11 shrink-0 rounded-lg"
+                    className="h-11 w-11 shrink-0 rounded-xl"
                     onClick={handleCopyLink}
                     aria-label="Copiar enlace"
                   >
