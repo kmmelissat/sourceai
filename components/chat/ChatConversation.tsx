@@ -149,7 +149,11 @@ function ChatComposer({
               : "mt-2 text-xs text-text-muted"
           }
         >
-          Conectados: {connections.slice(0, 3).map((c) => c.name).join(", ")}
+          Conectados:{" "}
+          {connections
+            .slice(0, 3)
+            .map((c) => c.name)
+            .join(", ")}
           {connections.length > 3 ? "..." : ""}
         </div>
       )}
