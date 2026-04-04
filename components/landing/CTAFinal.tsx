@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, CheckCircle2, Sparkles, Copy, Check } from "lucide-react";
@@ -10,13 +10,12 @@ export function CTAFinal() {
   const [copied, setCopied] = useState(false);
   const [shareUrl, setShareUrl] = useState("");
 
-  useEffect(() => {
-    if (typeof window !== "undefined") setShareUrl(window.location.href);
-  }, [isSubmitted]);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
+    if (typeof window !== "undefined") {
+      setShareUrl(window.location.href);
+    }
   };
 
   const handleCopyLink = async () => {

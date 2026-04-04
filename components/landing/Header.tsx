@@ -18,6 +18,12 @@ export function Header() {
         </Link>
         <nav className="hidden items-center gap-6 md:flex">
           <Link
+            href="/chat"
+            className="text-sm text-text-secondary hover:text-primary transition-colors"
+          >
+            Chat
+          </Link>
+          <Link
             href="#producto"
             className="text-sm text-text-secondary hover:text-primary transition-colors"
           >
@@ -44,7 +50,7 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm" asChild>
-            <Link href="#precios">Ver precios</Link>
+            <Link href="/chat">Abrir chat</Link>
           </Button>
           <Button size="sm" asChild>
             <Link href="#contacto">Solicitar acceso</Link>

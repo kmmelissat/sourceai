@@ -1,0 +1,187 @@
+[
+  {
+    "id": "boxful-admin-nextjs",
+    "title": "Admin web en Next.js",
+    "preview": "Dashboard operativo para dispatch y tracking.",
+    "messages": [
+      {
+        "id": "boxful-admin-nextjs-1",
+        "role": "user",
+        "content": "Explícame cómo está organizado el admin de Boxful en Next.js y React."
+      },
+      {
+        "id": "boxful-admin-nextjs-2",
+        "role": "assistant",
+        "content": "El admin parece estar orientado a operaciones logísticas: paneles de órdenes, estados de entrega, incidencias, conductores y monitoreo. En un stack Next.js/React lo normal es separar páginas operativas, componentes reutilizables para tablas y filtros, y servicios para consumir APIs internas."
+      },
+      {
+        "id": "boxful-admin-nextjs-3",
+        "role": "user",
+        "content": "¿Qué módulos esperarías encontrar primero?"
+      },
+      {
+        "id": "boxful-admin-nextjs-4",
+        "role": "assistant",
+        "content": "Lo más probable es ver módulos como órdenes, tracking, usuarios internos, conductores, incidencias, reportes y configuración. También suele existir una capa de auth/roles para distinguir operaciones, soporte, finanzas y admins globales."
+      },
+      {
+        "id": "boxful-admin-nextjs-5",
+        "role": "user",
+        "content": "¿Y qué componentes de UI se repiten mucho en un admin así?"
+      },
+      {
+        "id": "boxful-admin-nextjs-6",
+        "role": "assistant",
+        "content": "Se repiten tablas con filtros, buscadores, badges de estado, drawers para detalle, modales de confirmación, mapas o timelines de tracking, formularios para reasignación y tarjetas de métricas para operación diaria."
+      }
+    ]
+  },
+  {
+    "id": "boxful-liquidaciones-python",
+    "title": "Liquidaciones en Python",
+    "preview": "Cálculo de pagos y cierres por repartidor.",
+    "messages": [
+      {
+        "id": "boxful-liquidaciones-python-1",
+        "role": "user",
+        "content": "¿Qué responsabilidades tendría un repo de liquidaciones en Python para Boxful?"
+      },
+      {
+        "id": "boxful-liquidaciones-python-2",
+        "role": "assistant",
+        "content": "Normalmente calcula pagos por conductor o aliado logístico, consolida entregas válidas, aplica comisiones, bonos, descuentos, penalizaciones y genera reportes de cierre para finanzas. También suele incluir procesos batch y reglas de validación antes de publicar resultados."
+      },
+      {
+        "id": "boxful-liquidaciones-python-3",
+        "role": "user",
+        "content": "¿Qué entradas recibe ese proceso?"
+      },
+      {
+        "id": "boxful-liquidaciones-python-4",
+        "role": "assistant",
+        "content": "Suele tomar órdenes entregadas, ventanas de corte, tarifas por zona o servicio, eventos de soporte, ajustes manuales y catálogos de repartidores. A veces también integra datos contables o exportaciones previas para recalcular diferencias."
+      },
+      {
+        "id": "boxful-liquidaciones-python-5",
+        "role": "user",
+        "content": "¿Qué riesgos técnicos son comunes ahí?"
+      },
+      {
+        "id": "boxful-liquidaciones-python-6",
+        "role": "assistant",
+        "content": "Los riesgos típicos son duplicados por reintento, fechas mal cerradas, reglas de negocio distribuidas en varios scripts, ajustes manuales sin auditoría y diferencias entre la data operativa y la data usada por finanzas. También son comunes los problemas de performance cuando el cálculo se hace por lotes grandes."
+      }
+    ]
+  },
+  {
+    "id": "boxful-onboarding-riders",
+    "title": "Onboarding de riders",
+    "preview": "Flujo para alta y validación de repartidores.",
+    "messages": [
+      {
+        "id": "boxful-onboarding-riders-1",
+        "role": "user",
+        "content": "¿Cómo dividirías el onboarding de riders entre frontend y backend?"
+      },
+      {
+        "id": "boxful-onboarding-riders-2",
+        "role": "assistant",
+        "content": "En frontend manejaría formularios, carga de documentos, estados visibles del proceso y validaciones inmediatas. En backend centralizaría elegibilidad, revisión documental, persistencia, auditoría, scoring y notificaciones para cada etapa del alta."
+      },
+      {
+        "id": "boxful-onboarding-riders-3",
+        "role": "user",
+        "content": "¿Qué estados de proceso pondrías?"
+      },
+      {
+        "id": "boxful-onboarding-riders-4",
+        "role": "assistant",
+        "content": "Creado, documentos pendientes, en revisión, aprobado, rechazado, listo para activar y activo. Si Boxful opera por ciudades o flotas, también conviene modelar estados por plaza o por tipo de vehículo."
+      },
+      {
+        "id": "boxful-onboarding-riders-5",
+        "role": "user",
+        "content": "¿Qué pedirías en el admin para operación?"
+      },
+      {
+        "id": "boxful-onboarding-riders-6",
+        "role": "assistant",
+        "content": "Una cola de revisión con filtros, vista rápida de documentos, historial de cambios, motivos de rechazo, acciones masivas y trazabilidad de quién aprobó cada paso. Operaciones necesita velocidad y contexto, no solo formularios bonitos."
+      }
+    ]
+  },
+  {
+    "id": "boxful-settlements-errors",
+    "title": "Errores en settlement",
+    "preview": "Inconsistencias entre órdenes y pago final.",
+    "messages": [
+      {
+        "id": "boxful-settlements-errors-1",
+        "role": "user",
+        "content": "Tengo diferencias entre entregas cerradas y monto liquidado. ¿Dónde revisar primero?"
+      },
+      {
+        "id": "boxful-settlements-errors-2",
+        "role": "assistant",
+        "content": "Primero revisaría la fuente de verdad de entregas válidas, luego las reglas que excluyen órdenes, ajustes manuales y ventanas de corte. En logística, muchas diferencias salen de timestamps de cierre, estados no finales o reintentos duplicados."
+      },
+      {
+        "id": "boxful-settlements-errors-3",
+        "role": "user",
+        "content": "¿Qué checks rápidos harías antes de depurar código?"
+      },
+      {
+        "id": "boxful-settlements-errors-4",
+        "role": "assistant",
+        "content": "Compararía conteo de órdenes entregadas contra órdenes consideradas para pago, revisaría si hay anulaciones tardías, verificaciones de timezone, bonos fuera de rango y conductores con cambios de tarifa. Si eso no explica la diferencia, ya vale la pena entrar a código."
+      },
+      {
+        "id": "boxful-settlements-errors-5",
+        "role": "user",
+        "content": "¿Cómo lo harías más observable?"
+      },
+      {
+        "id": "boxful-settlements-errors-6",
+        "role": "assistant",
+        "content": "Guardaría un detalle por liquidación con inputs, reglas aplicadas, exclusiones y monto final. También expondría un breakdown por conductor y por orden. Sin esa trazabilidad, soporte y finanzas terminan reconstruyendo el cálculo manualmente."
+      }
+    ]
+  },
+  {
+    "id": "boxful-docs-prompt",
+    "title": "Prompt para documentación",
+    "preview": "Contexto técnico para equipos de producto y ops.",
+    "messages": [
+      {
+        "id": "boxful-docs-prompt-1",
+        "role": "user",
+        "content": "Dame un prompt para documentar repos de Boxful orientados a operaciones logísticas."
+      },
+      {
+        "id": "boxful-docs-prompt-2",
+        "role": "assistant",
+        "content": "Puedes pedir: analiza este repositorio y resume propósito de negocio, módulos clave, integraciones, flujos críticos, entidades, jobs, puntos de falla y dependencias entre operación, admin y liquidaciones. Explica además qué equipos lo usan y qué impacto tiene en logística diaria."
+      },
+      {
+        "id": "boxful-docs-prompt-3",
+        "role": "user",
+        "content": "¿Cómo lo adapto para un repo de frontend?"
+      },
+      {
+        "id": "boxful-docs-prompt-4",
+        "role": "assistant",
+        "content": "En frontend conviene pedir rutas principales, pantallas, permisos, componentes compartidos, fuentes de datos, estados críticos y dependencias con backend. También es útil pedir qué vistas son clave para soporte, dispatch y monitoreo."
+      },
+      {
+        "id": "boxful-docs-prompt-5",
+        "role": "user",
+        "content": "¿Y para uno de Python batch?"
+      },
+      {
+        "id": "boxful-docs-prompt-6",
+        "role": "assistant",
+        "content": "Para Python batch yo pediría jobs existentes, inputs, outputs, reglas de negocio, frecuencia de ejecución, dependencias externas, fallos típicos, métricas y cómo validar resultados. Eso hace la documentación útil para ingeniería y para áreas como finanzas u operaciones."
+      }
+    ]
+  }
+]

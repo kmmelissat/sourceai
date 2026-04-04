@@ -37,14 +37,14 @@ export function ChatMockup() {
               a producción. El proceso toma aproximadamente 8 minutos.
             </p>
             <div className="flex flex-wrap gap-2 pt-2">
-              <span className="inline-flex items-center gap-1 rounded-md border border-border bg-bg-elevated px-2 py-1 text-xs text-text-secondary">
-                📁 GitHub
+              <span className="inline-flex items-center rounded-md border border-border bg-bg-elevated px-2 py-1 text-xs text-text-secondary">
+                GitHub
               </span>
-              <span className="inline-flex items-center gap-1 rounded-md border border-border bg-bg-elevated px-2 py-1 text-xs text-text-secondary">
-                📄 Notion
+              <span className="inline-flex items-center rounded-md border border-border bg-bg-elevated px-2 py-1 text-xs text-text-secondary">
+                Notion
               </span>
-              <span className="inline-flex items-center gap-1 rounded-md border border-border bg-bg-elevated px-2 py-1 text-xs text-text-secondary">
-                💬 Slack
+              <span className="inline-flex items-center rounded-md border border-border bg-bg-elevated px-2 py-1 text-xs text-text-secondary">
+                Slack
               </span>
             </div>
           </div>
