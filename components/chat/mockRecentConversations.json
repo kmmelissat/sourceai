@@ -1,186 +1,186 @@
 [
   {
-    "id": "boxful-admin-nextjs",
-    "title": "Admin web en Next.js",
-    "preview": "Dashboard operativo para dispatch y tracking.",
+    "id": "novapay-onboarding-b2b",
+    "title": "Onboarding comercios B2B",
+    "preview": "KYC, staging, validación técnica y paso a producción.",
     "messages": [
       {
-        "id": "boxful-admin-nextjs-1",
+        "id": "novapay-onboarding-b2b-1",
         "role": "user",
-        "content": "Explícame cómo está organizado el admin de Boxful en Next.js y React."
+        "content": "Resúmeme el proceso de onboarding para un nuevo comercio B2B en NovaPay."
       },
       {
-        "id": "boxful-admin-nextjs-2",
+        "id": "novapay-onboarding-b2b-2",
         "role": "assistant",
-        "content": "El admin parece estar orientado a operaciones logísticas: paneles de órdenes, estados de entrega, incidencias, conductores y monitoreo. En un stack Next.js/React lo normal es separar páginas operativas, componentes reutilizables para tablas y filtros, y servicios para consumir APIs internas."
+        "content": "El flujo de onboarding B2B en NovaPay tiene cuatro pasos principales:\n\n1. **Recolección de documentos (KYC):** se solicita escritura de constitución, NIT de la empresa y DUI o DPI del representante legal.\n2. **Creación de cuenta en staging:** se habilita el entorno de pruebas para que el cliente haga transacciones de prueba.\n3. **Validación técnica:** el equipo de ingeniería del cliente debe confirmar que puede recibir webhooks de NovaPay.\n4. **Paso a producción:** una vez validado el cumplimiento por Compliance, se activan las credenciales de producción.\n\nLa métrica clave es que el tiempo entre la firma del contrato y la primera transacción real no exceda los **5 días hábiles**."
       },
       {
-        "id": "boxful-admin-nextjs-3",
+        "id": "novapay-onboarding-b2b-3",
         "role": "user",
-        "content": "¿Qué módulos esperarías encontrar primero?"
+        "content": "¿Qué tendría que revisar Customer Success antes de pedir producción?"
       },
       {
-        "id": "boxful-admin-nextjs-4",
+        "id": "novapay-onboarding-b2b-4",
         "role": "assistant",
-        "content": "Lo más probable es ver módulos como órdenes, tracking, usuarios internos, conductores, incidencias, reportes y configuración. También suele existir una capa de auth/roles para distinguir operaciones, soporte, finanzas y admins globales."
+        "content": "Antes de pedir producción, Customer Success debería confirmar tres cosas:\n\n- que los documentos KYC estén completos\n- que el comercio ya pruebe correctamente en staging\n- que la validación técnica de webhooks esté cerrada\n\nSi cualquiera de esos puntos sigue abierto, pasar a producción es prematuro."
       },
       {
-        "id": "boxful-admin-nextjs-5",
+        "id": "novapay-onboarding-b2b-5",
         "role": "user",
-        "content": "¿Y qué componentes de UI se repiten mucho en un admin así?"
+        "content": "¿Cuál sería un buen KPI para este flujo?"
       },
       {
-        "id": "boxful-admin-nextjs-6",
+        "id": "novapay-onboarding-b2b-6",
         "role": "assistant",
-        "content": "Se repiten tablas con filtros, buscadores, badges de estado, drawers para detalle, modales de confirmación, mapas o timelines de tracking, formularios para reasignación y tarjetas de métricas para operación diaria."
+        "content": "El KPI explícito en la guía es el tiempo desde firma hasta la primera transacción real. El objetivo es mantenerlo por debajo de **5 días hábiles**. Operativamente, también podrías seguir tiempo en KYC, tiempo en validación técnica y porcentaje de comercios que se quedan estancados en staging."
       }
     ]
   },
   {
-    "id": "boxful-liquidaciones-python",
-    "title": "Liquidaciones en Python",
-    "preview": "Cálculo de pagos y cierres por repartidor.",
+    "id": "novapay-setup-core-local",
+    "title": "Setup local backend core",
+    "preview": "Core transaccional en Go y agente de observabilidad eBPF.",
     "messages": [
       {
-        "id": "boxful-liquidaciones-python-1",
+        "id": "novapay-setup-core-local-1",
         "role": "user",
-        "content": "¿Qué responsabilidades tendría un repo de liquidaciones en Python para Boxful?"
+        "content": "¿Cómo levanto localmente el backend core de NovaPay?"
       },
       {
-        "id": "boxful-liquidaciones-python-2",
+        "id": "novapay-setup-core-local-2",
         "role": "assistant",
-        "content": "Normalmente calcula pagos por conductor o aliado logístico, consolida entregas válidas, aplica comisiones, bonos, descuentos, penalizaciones y genera reportes de cierre para finanzas. También suele incluir procesos batch y reglas de validación antes de publicar resultados."
+        "content": "Según la guía de setup local, el core transaccional de NovaPay está en Go y usa el repositorio `github.com/novapay-sv/core-tx`.\n\nPasos:\n1. Clonar el repositorio con `git clone git@github.com:novapay-sv/core-tx.git`\n2. Levantar MongoDB local con `docker-compose up -d`\n3. Descargar dependencias con `go mod download`\n4. Ejecutar el servidor con `go run cmd/server/main.go`\n\nEl servicio levanta en `localhost:8080` y requiere **Go 1.22+**, Docker y Docker Compose."
       },
       {
-        "id": "boxful-liquidaciones-python-3",
+        "id": "novapay-setup-core-local-3",
         "role": "user",
-        "content": "¿Qué entradas recibe ese proceso?"
+        "content": "¿Y el agente de observabilidad?"
       },
       {
-        "id": "boxful-liquidaciones-python-4",
+        "id": "novapay-setup-core-local-4",
         "role": "assistant",
-        "content": "Suele tomar órdenes entregadas, ventanas de corte, tarifas por zona o servicio, eventos de soporte, ajustes manuales y catálogos de repartidores. A veces también integra datos contables o exportaciones previas para recalcular diferencias."
+        "content": "El agente de observabilidad usa eBPF y está en `github.com/novapay-sv/net-observer-ebpf`.\n\nPuntos importantes:\n- captura métricas de red y latencia desde el kernel\n- no corre nativamente en macOS o Windows\n- para levantarlo localmente debes usar Vagrant o un contenedor Docker privilegiado\n- el comando de inicio es `sudo ./bin/observer-agent --config local.yaml`"
       },
       {
-        "id": "boxful-liquidaciones-python-5",
+        "id": "novapay-setup-core-local-5",
         "role": "user",
-        "content": "¿Qué riesgos técnicos son comunes ahí?"
+        "content": "Entonces si estoy en Mac, ¿qué me bloquea exactamente?"
       },
       {
-        "id": "boxful-liquidaciones-python-6",
+        "id": "novapay-setup-core-local-6",
         "role": "assistant",
-        "content": "Los riesgos típicos son duplicados por reintento, fechas mal cerradas, reglas de negocio distribuidas en varios scripts, ajustes manuales sin auditoría y diferencias entre la data operativa y la data usada por finanzas. También son comunes los problemas de performance cuando el cálculo se hace por lotes grandes."
+        "content": "Lo que te bloquea es que eBPF interactúa con el kernel de Linux. Por eso, desde macOS no lo vas a ejecutar nativamente. La ruta práctica es usar el entorno provisto en Vagrant o montar un contenedor privilegiado si el equipo ya tiene esa receta documentada."
       }
     ]
   },
   {
-    "id": "boxful-onboarding-riders",
-    "title": "Onboarding de riders",
-    "preview": "Flujo para alta y validación de repartidores.",
+    "id": "novapay-pci-datos-personales",
+    "title": "PCI y datos personales",
+    "preview": "Tokenización, residencia de datos y derecho al olvido.",
     "messages": [
       {
-        "id": "boxful-onboarding-riders-1",
+        "id": "novapay-pci-datos-personales-1",
         "role": "user",
-        "content": "¿Cómo dividirías el onboarding de riders entre frontend y backend?"
+        "content": "Necesito un resumen de la política de tratamiento de datos personales y PCI-DSS en NovaPay."
       },
       {
-        "id": "boxful-onboarding-riders-2",
+        "id": "novapay-pci-datos-personales-2",
         "role": "assistant",
-        "content": "En frontend manejaría formularios, carga de documentos, estados visibles del proceso y validaciones inmediatas. En backend centralizaría elegibilidad, revisión documental, persistencia, auditoría, scoring y notificaciones para cada etapa del alta."
+        "content": "La política cubre tres puntos clave:\n\n## 1. Cumplimiento PCI-DSS\nNovaPay **no almacena** el PAN completo ni el CVV de ninguna tarjeta. Los datos sensibles se tokenizan en el frontend usando un iFrame seguro antes de tocar los servidores en AWS.\n\n## 2. Residencia de datos\nTodos los datos transaccionales de comercios centroamericanos deben residir en la región `us-east-1` de AWS. No se permite replicar bases de producción a otras regiones sin anonimización o enmascaramiento previo.\n\n## 3. Derecho al olvido\nSi un usuario solicita eliminación de datos, se borra la PII como nombres, correos y teléfonos, pero el registro de la transacción financiera se conserva por **15 años** por cumplimiento legal."
       },
       {
-        "id": "boxful-onboarding-riders-3",
+        "id": "novapay-pci-datos-personales-3",
         "role": "user",
-        "content": "¿Qué estados de proceso pondrías?"
+        "content": "¿Qué es lo más delicado para un desarrollador frontend?"
       },
       {
-        "id": "boxful-onboarding-riders-4",
+        "id": "novapay-pci-datos-personales-4",
         "role": "assistant",
-        "content": "Creado, documentos pendientes, en revisión, aprobado, rechazado, listo para activar y activo. Si Boxful opera por ciudades o flotas, también conviene modelar estados por plaza o por tipo de vehículo."
+        "content": "Lo más delicado es respetar que la tokenización ocurra antes de que los datos sensibles toquen los servidores de NovaPay. En términos prácticos, el frontend no debe inventar flujos que capturen PAN completo ni CVV fuera del iFrame seguro."
       },
       {
-        "id": "boxful-onboarding-riders-5",
+        "id": "novapay-pci-datos-personales-5",
         "role": "user",
-        "content": "¿Qué pedirías en el admin para operación?"
+        "content": "¿Y qué pasa si un cliente pide borrar su información?"
       },
       {
-        "id": "boxful-onboarding-riders-6",
+        "id": "novapay-pci-datos-personales-6",
         "role": "assistant",
-        "content": "Una cola de revisión con filtros, vista rápida de documentos, historial de cambios, motivos de rechazo, acciones masivas y trazabilidad de quién aprobó cada paso. Operaciones necesita velocidad y contexto, no solo formularios bonitos."
+        "content": "El ticket lo escala Soporte hacia Base de Datos. Se elimina la PII del usuario final, pero se retienen campos financieros como monto, fecha e ID de comercio durante 15 años, porque la política los considera necesarios para cumplimiento de prevención de lavado de dinero."
       }
     ]
   },
   {
-    "id": "boxful-settlements-errors",
-    "title": "Errores en settlement",
-    "preview": "Inconsistencias entre órdenes y pago final.",
+    "id": "novapay-frontend-react",
+    "title": "Reglas frontend React 2026",
+    "preview": "Zustand, Feature-Sliced Design y Axios interceptor.",
     "messages": [
       {
-        "id": "boxful-settlements-errors-1",
+        "id": "novapay-frontend-react-1",
         "role": "user",
-        "content": "Tengo diferencias entre entregas cerradas y monto liquidado. ¿Dónde revisar primero?"
+        "content": "¿Cuáles son las reglas frontend que debo seguir en NovaPay?"
       },
       {
-        "id": "boxful-settlements-errors-2",
+        "id": "novapay-frontend-react-2",
         "role": "assistant",
-        "content": "Primero revisaría la fuente de verdad de entregas válidas, luego las reglas que excluyen órdenes, ajustes manuales y ventanas de corte. En logística, muchas diferencias salen de timestamps de cierre, estados no finales o reintentos duplicados."
+        "content": "La guía frontend de NovaPay marca tres reglas fuertes:\n\n1. **Estado global:** Redux está deprecado en módulos nuevos. Debes usar **Zustand**.\n2. **Estructura de carpetas:** usan **Feature-Sliced Design**, agrupando por feature y no por tipo técnico global.\n3. **Peticiones HTTP:** todas las llamadas a la API deben pasar por el interceptor de Axios en `src/lib/apiClient.ts`, porque ahí se agrega el JWT y el refresco de sesión."
       },
       {
-        "id": "boxful-settlements-errors-3",
+        "id": "novapay-frontend-react-3",
         "role": "user",
-        "content": "¿Qué checks rápidos harías antes de depurar código?"
+        "content": "¿Cómo sería un ejemplo correcto de estructura?"
       },
       {
-        "id": "boxful-settlements-errors-4",
+        "id": "novapay-frontend-react-4",
         "role": "assistant",
-        "content": "Compararía conteo de órdenes entregadas contra órdenes consideradas para pago, revisaría si hay anulaciones tardías, verificaciones de timezone, bonos fuera de rango y conductores con cambios de tarifa. Si eso no explica la diferencia, ya vale la pena entrar a código."
+        "content": "La guía propone algo así:\n\n```text\n/src/features/transactions/\n  /components/\n  /hooks/\n  /store/\n```\n\nLa idea es encapsular componentes, hooks y store de Zustand dentro de la misma feature, en lugar de repartirlos en carpetas globales enormes."
       },
       {
-        "id": "boxful-settlements-errors-5",
+        "id": "novapay-frontend-react-5",
         "role": "user",
-        "content": "¿Cómo lo harías más observable?"
+        "content": "¿Por qué NovaPay prefiere Zustand?"
       },
       {
-        "id": "boxful-settlements-errors-6",
+        "id": "novapay-frontend-react-6",
         "role": "assistant",
-        "content": "Guardaría un detalle por liquidación con inputs, reglas aplicadas, exclusiones y monto final. También expondría un breakdown por conductor y por orden. Sin esa trazabilidad, soporte y finanzas terminan reconstruyendo el cálculo manualmente."
+        "content": "La guía lo justifica porque es más ligero, requiere menos configuración y reduce el prop-drilling en partes profundas del dashboard transaccional. O sea, no es solo una preferencia estética, sino una decisión para velocidad y menor complejidad operativa."
       }
     ]
   },
   {
-    "id": "boxful-docs-prompt",
-    "title": "Prompt para documentación",
-    "preview": "Contexto técnico para equipos de producto y ops.",
+    "id": "novapay-politicas-internas",
+    "title": "PTO, reembolsos y onboarding",
+    "preview": "Primeros días, vacaciones y gastos reembolsables.",
     "messages": [
       {
-        "id": "boxful-docs-prompt-1",
+        "id": "novapay-politicas-internas-1",
         "role": "user",
-        "content": "Dame un prompt para documentar repos de Boxful orientados a operaciones logísticas."
+        "content": "Dame un resumen corto de políticas internas importantes en NovaPay."
       },
       {
-        "id": "boxful-docs-prompt-2",
+        "id": "novapay-politicas-internas-2",
         "role": "assistant",
-        "content": "Puedes pedir: analiza este repositorio y resume propósito de negocio, módulos clave, integraciones, flujos críticos, entidades, jobs, puntos de falla y dependencias entre operación, admin y liquidaciones. Explica además qué equipos lo usan y qué impacto tiene en logística diaria."
+        "content": "Hay tres bloques bien claros:\n\n- **Onboarding interno:** en los primeros días debes configurar correo corporativo, Slack, 1Password y, si eres de ingeniería, accesos a AWS Console y GitHub. SourceAI aparece explícitamente como la fuente principal para resolver dudas.\n- **Tiempo libre (PTO):** NovaPay da 15 días de vacaciones al año y suma 3 días extra de Productivity Bonus si cumples KPIs. También incluye día libre de cumpleaños, permisos de enfermedad flexibles y 4 días hábiles por duelo.\n- **Reembolsos y viáticos:** almuerzos con clientes hasta $35 por persona, hospedaje regional hasta $120 por noche y entrega de comprobantes antes del día 25 para pago junto con planilla el día 30."
       },
       {
-        "id": "boxful-docs-prompt-3",
+        "id": "novapay-politicas-internas-3",
         "role": "user",
-        "content": "¿Cómo lo adapto para un repo de frontend?"
+        "content": "¿Cómo pido vacaciones largas?"
       },
       {
-        "id": "boxful-docs-prompt-4",
+        "id": "novapay-politicas-internas-4",
         "role": "assistant",
-        "content": "En frontend conviene pedir rutas principales, pantallas, permisos, componentes compartidos, fuentes de datos, estados críticos y dependencias con backend. También es útil pedir qué vistas son clave para soporte, dispatch y monitoreo."
+        "content": "Las vacaciones largas, es decir más de 5 días, se solicitan en el portal de HR con al menos **15 días de anticipación**. Para días individuales, basta con avisar a tu manager por Slack con **48 horas** de antelación."
       },
       {
-        "id": "boxful-docs-prompt-5",
+        "id": "novapay-politicas-internas-5",
         "role": "user",
-        "content": "¿Y para uno de Python batch?"
+        "content": "¿Qué necesito saber de reembolsos para no cometer errores?"
       },
       {
-        "id": "boxful-docs-prompt-6",
+        "id": "novapay-politicas-internas-6",
         "role": "assistant",
-        "content": "Para Python batch yo pediría jobs existentes, inputs, outputs, reglas de negocio, frecuencia de ejecución, dependencias externas, fallos típicos, métricas y cómo validar resultados. Eso hace la documentación útil para ingeniería y para áreas como finanzas u operaciones."
+        "content": "Tres reglas importantes:\n\n1. las facturas deben emitirse a nombre de **NovaPay S.A. de C.V.**\n2. debes subir comprobantes a más tardar el **día 25** de cada mes\n3. si pierdes un ticket físico, el gasto no será reembolsado sin excepción\n\nAdemás, para transporte la guía recomienda usar Uber Enterprise vinculado a la cuenta corporativa."
       }
     ]
   }

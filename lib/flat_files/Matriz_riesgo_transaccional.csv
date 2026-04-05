@@ -1,0 +1,5 @@
+Nivel_Riesgo,Tipo_Comercio,Monto_Promedio_Mensual,Accion_Requerida,Frecuencia_Auditoria
+Bajo,E-commerce Retail,< $10000,Monitoreo Automatizado,Anual
+Medio,Servicios Profesionales,$10000 - $50000,Revisión Manual de Contratos,Semestral
+Alto,Casas de Cambio / Remesas,> $50000,Aprobación de Junta Directiva,Trimestral
+Prohibido,Casinos y Apuestas Online,Cualquier Monto,Bloqueo Inmediato de Cuenta,N/A

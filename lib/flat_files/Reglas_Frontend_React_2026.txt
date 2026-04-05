@@ -1,0 +1,17 @@
+GUÍA DE ESTILO Y ARQUITECTURA FRONTEND - NOVAPAY (Actualizado: Marzo 2026)
+
+Todo el portal administrativo y el dashboard B2B de clientes está desarrollado en React. Para mantener la consistencia en el código, todos los desarrolladores deben adherirse a las siguientes directrices:
+
+1. MANEJO DE ESTADO GLOBAL:
+Queda estrictamente deprecado el uso de Redux en los nuevos módulos. El Boilerplate oficial de la empresa y todos los nuevos features deben utilizar Zustand. Es más ligero, requiere menos configuración y evita el prop-drilling en componentes profundos del dashboard transaccional.
+
+2. ESTRUCTURA DE CARPETAS (Feature-Sliced Design):
+No agrupen archivos por tipo técnico (ej. no usar una carpeta global /components o /hooks para todo). Usen agrupación por "Feature".
+Ejemplo correcto:
+/src/features/transactions/
+  /components/
+  /hooks/
+  /store/ (aquí va el store de Zustand de esta feature)
+
+3. PETICIONES HTTP:
+Todas las peticiones a nuestra API en AWS deben pasar por el interceptor de Axios configurado en `src/lib/apiClient.ts`. Este interceptor añade automáticamente el token JWT y maneja los refrescos de sesión.
