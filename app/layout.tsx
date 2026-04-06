@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Rubik, Gabarito } from "next/font/google";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+const siteUrl = "https://sourceai-red.vercel.app";
 const socialImage = `${siteUrl}/sourceAI.jpg`;
 const title = "SourceAI - La IA que entiende tu código, documentación y procesos";
 const description =
